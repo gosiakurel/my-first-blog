@@ -1,38 +1,13 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <title>Blog</title>
+{% extends 'blog/base.html' %}
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-
-</head>
-<body>
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>       
-      </button>
-      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-star"></span>   Blog   <span class="glyphicon glyphicon-star"></span></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#travels">Q</a></li>
-        <li><a href="#pricing">W</a></li>
-        <li><a href="#contact-adress">K</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Z</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-
-
-</body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}
